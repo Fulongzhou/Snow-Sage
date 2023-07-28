@@ -88,6 +88,7 @@ const CompleteUserInfo = ({ user }) => {
               Instructor
             </Button>
           </label>
+          
         </div>
 
         <label>
