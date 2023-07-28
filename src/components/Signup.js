@@ -23,32 +23,32 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-  
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       setError("Passwords do not match");
       return; // Return early if passwords don't match
     }
-  
+
     const name = nameRef.current.value.trim();
     if (!name) {
       setError("Name cannot be empty");
       return; // Return early if name is empty
     }
-  
+
     try {
       setError("");
       setLoading(true);
-  
+
       // Create the user and log them in
       const { user: firebaseUser } = await createUserWithEmailAndPassword(
         auth,
         emailRef.current.value,
         passwordRef.current.value
       );
-  
+
       // Update the user's profile with their name
       await updateProfile(firebaseUser, { displayName: name });
-  
+
       // Create the "users" collection and add a document with user data
       const userData = {
         id: firebaseUser.uid,
@@ -56,10 +56,10 @@ export default function Signup() {
         email: firebaseUser.email,
         // Add any additional user data you want to store in the collection
       };
-  
+
       // Use addDoc to automatically generate a unique ID for the new document
       await setDoc(doc(db, "users", firebaseUser.uid), userData);
-  
+
       navigate("/complete-userinfo");
     } catch (err) {
       setError("Failed to create an account: " + err.message);
@@ -69,9 +69,28 @@ export default function Signup() {
 
   const signInWithGoogle = async () => {
     try {
-      const { user } = await signInWithPopup(auth, googleProvider);    
-        navigate("/complete-userinfo");
-    } catch (err) {
+      const { user } = await signInWithPopup(auth, googleProvider);
+      console.log(user);
+  
+      const name = user.displayName || "No Name";
+      console.log(name);
+  
+      // Update the user's profile with their name (regardless of whether it's a new user)
+      await updateProfile(user, { displayName: name });
+  
+      // Add the user's data to the "users" collection in Firestore
+      const userData = {
+        id: user.uid,
+        name: name,
+        email: user.email,
+        // Add any additional user data you want to store in the collection
+      };
+  
+      // Use setDoc to explicitly specify the document ID (user's uid) in the "users" collection
+      await setDoc(doc(db, "users", user.uid), userData);
+  
+      navigate("/complete-userinfo");
+    }  catch (err) {
       setError("Failed to sign in with Google: " + err.message);
     }
   };
@@ -103,8 +122,7 @@ export default function Signup() {
               onClick={handleSubmit}
               disabled={loading}
               className="w-100 mb-3"
-              type="submit"
-            >
+              type="submit">
               Sign Up
             </Button>
           </Form>
@@ -116,10 +134,3 @@ export default function Signup() {
     </>
   );
 }
-
-
-
-
-
-
-
