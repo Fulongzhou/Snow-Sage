@@ -49,6 +49,7 @@
   .form-container {
     display: flex;
     justify-content: center;
+
   }
   .form{
     justify-content: center;
@@ -108,4 +109,8 @@
 }
 .message-button{
   margin-bottom: 10px;
+}
+.form-width{
+  justify-content: center;
+  align-items: center;
 }

@@ -94,7 +94,7 @@ export default function Signup() {
 
   return (
     <>
-      <Card>
+      <Card className=" form-width">
         <Card.Body>
           <h2 className="form-name">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}

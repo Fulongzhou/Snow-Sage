@@ -220,7 +220,7 @@ const Booking = () => {
                         )
                       )}
                     </select>&nbsp;
-                    <Button style={{ fontSize: "9px", padding: "5px 15px", marginBottom:"30px" }} onClick={() => handleSendMessage(index)}>
+                    <Button style={{ fontSize: "9px", padding: "5px 15px", marginBottom:"5px" }} onClick={() => handleSendMessage(index)}>
                       Send
                     </Button>
                   </>

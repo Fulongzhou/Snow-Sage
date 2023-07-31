@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <Card>
+    <Card className="form-width">
       <Card.Body>
         <h2 className="form-name">Log In</h2>
         {error && <Alert variant="danger">{error}</Alert>}
