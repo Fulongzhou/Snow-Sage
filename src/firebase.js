@@ -7,7 +7,7 @@ import {getStorage} from 'firebase/storage'
 const firebaseConfig = {
   apiKey: "AIzaSyABS9nzLSWdCUlmsBjNRUwukEE5MAchxwg",
   authDomain: "snowsage-test.firebaseapp.com",
-  databaseURL: "https://snowsage-test-default-rtdb.firebaseio.com/",
+  databaseURL: "https://snowsage-test-default-rtdb.firebaseio.com",
   projectId: "snowsage-test",
   storageBucket: "snowsage-test.appspot.com",
   messagingSenderId: "212345181960",

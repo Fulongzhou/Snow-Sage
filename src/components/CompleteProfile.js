@@ -30,6 +30,23 @@ const CompleteProfile = ({ user }) => {
 
   // Load user data if it exists in Firestore
   useEffect(() => {
+    const fetchUserData = async () => {
+      if (user && user.uid) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+          setGender(userData.gender || "");
+          setIsStudent(userData.isStudent || false);
+          setIsInstructor(userData.isInstructor || false);
+          setLevel(userData.level || "");
+          setTitle(userData.title || "");
+          setContent(userData.content || "");
+          setResorts(userData.resorts || []);
+        }
+      }
+    };
     const fetchResortsData = async () => {
       try {
         const resortsQuerySnapshot = await getDocs(collection(db, "resorts"));
@@ -50,7 +67,8 @@ const CompleteProfile = ({ user }) => {
     if (user && user.uid) {
       fetchResortsData();
     }
-
+    fetchUserData();
+    fetchResortsData();
     // Unsubscribe the snapshot listener when the component unmounts
     return () => unsubscribe();
   }, [user]);
@@ -106,8 +124,6 @@ const CompleteProfile = ({ user }) => {
       const newResortRef = await addDoc(collection(db, "resorts"), {
         name: newResort,
       });
-      console.log("New resort added with ID: ", newResortRef.id);
-      // Clear the input field after adding the new resort
       setNewResort("");
       // Hide the create form after creating the resort
       setShowCreateForm(false);

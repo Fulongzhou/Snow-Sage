@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "auth-test-1afda"
-  }
+    "default": "snowsage-test",
+    " ": "snowsage-test"
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -14,6 +14,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTH_TEST_1AFDA }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SNOWSAGE_TEST }}'
           channelId: live
-          projectId: auth-test-1afda
+          projectId: snowsage-test
