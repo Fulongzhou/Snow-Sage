@@ -24,7 +24,7 @@ const Login = () => {
         emailRef.current.value,
         passwordRef.current.value
       );
-      navigate("/complete-userinfo");
+      navigate("/home");
     } catch (err) {
       setError("Failed to log in: " + err.message);
     }
@@ -35,7 +35,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/complete-userinfo");
+      navigate("/home");
     } catch (err) {
       setError("Failed to sign in with Google: " + err.message);
     }
@@ -44,7 +44,7 @@ const Login = () => {
   return (
     <Card>
       <Card.Body>
-        <h2 className="text-center mb-4">Log In</h2>
+        <h2 className="form-name">Log In</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form>
           <Form.Group id="email">

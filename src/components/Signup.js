@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
-  signOut,
   updateProfile,
 } from "firebase/auth";
 import { Form, Button, Card, Alert } from "react-bootstrap";
@@ -60,7 +59,7 @@ export default function Signup() {
       // Use addDoc to automatically generate a unique ID for the new document
       await setDoc(doc(db, "users", firebaseUser.uid), userData);
 
-      navigate("/complete-userinfo");
+      navigate("/complete-profile");
     } catch (err) {
       setError("Failed to create an account: " + err.message);
     }
@@ -70,10 +69,8 @@ export default function Signup() {
   const signInWithGoogle = async () => {
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
-      console.log(user);
   
       const name = user.displayName || "No Name";
-      console.log(name);
   
       // Update the user's profile with their name (regardless of whether it's a new user)
       await updateProfile(user, { displayName: name });
@@ -89,7 +86,7 @@ export default function Signup() {
       // Use setDoc to explicitly specify the document ID (user's uid) in the "users" collection
       await setDoc(doc(db, "users", user.uid), userData);
   
-      navigate("/complete-userinfo");
+      navigate("/complete-profile");
     }  catch (err) {
       setError("Failed to sign in with Google: " + err.message);
     }
@@ -99,22 +96,22 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="form-name">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form>
-            <Form.Group id="name">
+            <Form.Group id="name" className="form-content">
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" ref={nameRef} required />
             </Form.Group>
-            <Form.Group id="email">
+            <Form.Group id="email" className="form-content">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <Form.Group id="password">
+            <Form.Group id="password" className="form-content">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Form.Group id="password-confirm">
+            <Form.Group id="password-confirm" className="form-content">
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>

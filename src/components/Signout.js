@@ -9,16 +9,22 @@ const Signout = () => {
   const logOut = async () => {
     try {
       await signOut(auth);
-    //   navigate("/signup");
+      navigate("/signup");
     } catch (err) {
       console.error("Failed to log out: ", err.message);
     }
   };
 
   return (
-    <Button onClick={logOut} className="w-100">
+    <div className="form-container">
+        <div>
+        <Button onClick={logOut} style={{ fontSize: "15px", padding: "7px 180px" }}>
       Log Out
     </Button>
+        </div>
+     
+    </div>
+   
   );
 };
 
