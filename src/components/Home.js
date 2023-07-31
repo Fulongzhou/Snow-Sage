@@ -81,8 +81,7 @@ const Home = () => {
                     Cancel
                   </Button>
                 )}
-              </li>
-              
+              </li>      
             ))}
           </ul>
         ) : (
