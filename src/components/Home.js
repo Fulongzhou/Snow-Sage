@@ -59,7 +59,7 @@ const Home = () => {
         <Link to="/profile-review">Profile</Link>
       </div>
       <div className="home-view">
-        <p className="list">Your appointment list:</p>
+        <p className="list">Your Appointment List:</p>
         {appointments.length > 0 ? (
           <ul>
             {appointments.map((appointment, index) => (
